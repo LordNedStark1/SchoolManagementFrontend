@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+
+.school-image-main{
+  background-image: url('../assets/unsplash_LWfFfA5U5z8.png');
+  height: 345px;
+  background-repeat: no-repeat;
+
+}
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -29,5 +36,4 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-}
+  } */
