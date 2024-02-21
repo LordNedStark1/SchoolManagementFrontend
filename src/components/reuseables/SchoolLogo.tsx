@@ -5,13 +5,13 @@ import SchoolIcon from "../../assets/Icons/SchoolIcon";
 //     url: string;
 //   }
 
-function SchoolLogo({ url }){
+function SchoolLogo({ url, logoName }){
   return (
     <>
     {!url ? (
       <div className="flex flex-rows ">
         <SchoolIcon />{" "}
-        <span className="text-[#008EEF] font-extrabold text-lg">enum</span>
+        <span className="text-[#008EEF] font-extrabold text-lg">{logoName}</span>
       </div>
     ) : (
       <img src={url} alt="school logo" height={65} width={65}/>

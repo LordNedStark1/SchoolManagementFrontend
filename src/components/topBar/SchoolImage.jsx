@@ -1,5 +1,6 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa6";
+
 function SchoolImage() {
   return (
     <div

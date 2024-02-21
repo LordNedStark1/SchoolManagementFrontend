@@ -1,4 +1,5 @@
 import React from "react";
+import NavItem from "./NavItem";
 
 
 interface SideBarItemsProps {
@@ -8,12 +9,10 @@ interface SideBarItemsProps {
 function SideBarItems({ values }: SideBarItemsProps) {
     
   return (
-    <div>
+    <div className="ml-2">
         {values.map((value, index) => (
-        <div key={index} className="mb-5 flex">
-          <img src={value.imagePath} alt="" />
-          <span className="ml-6">{value.name}</span>
-        </div>
+          
+          <NavItem index={index} value={value}/>
       ))}
     </div>
   );

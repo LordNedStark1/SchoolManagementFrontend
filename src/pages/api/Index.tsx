@@ -9,10 +9,11 @@ function Index() {
     <>
       <SchoolHeader />
       <SchoolImage />
-      <div className = 'flex flex-row'>
-        <div className = 'mr-20 '><SideBar/></div>
-        <><CreateCohortBody/></>
-      </div>
+
+      {/* <div className = 'sm:grid md:flex flex-row'> */}
+        <SideBar/>
+        <CreateCohortBody/>
+      {/* </div> */}
       
     </>
   );

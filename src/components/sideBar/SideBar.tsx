@@ -1,5 +1,6 @@
 import React from 'react'
 import SideBarItems from './SideBarItems'
+import SelectDropDown from '../reuseables/SelectDropDown'
 
 function SideBar() {
   const items = [
@@ -21,29 +22,16 @@ function SideBar() {
     },
   ]
   return (
-    <div className='mt-12 ml-12 mr-9'>
-      <SideBarItems values={items}/>
-      {/* <div className='mb-5 flex '>
-      <img src={"/users.png"} alt=''/>
-        <span className='ml-6'>Cohorts</span>
-      sS</div>
-
-      <div className='mb-5  flex'>
-      <img src={"/book-open.png"} alt=''/>
-        <span className='ml-6'>Programs</span>
-      </div>
-
-      <div className='mb-5 flex'>
-        <img src={"/briefcase.png"} alt=''/>
-        <span className='ml-6'>Instructors</span>
-      </div>
-
-      <div className='mb-5 flex'>
-      <img src={"/user.png"} alt=''/>
-        <span className='ml-6'>Learners</span>
-      </div> */}
-      
+    <>
+    <div className=' hidden md:visible md:mt-12 ml-12 mr-9'>
+      <SideBarItems values={items} />
     </div>
+    <div className='grid justify-center place-items-center mt-6 md:hidden'>
+      <span className='ml-4 '>Switch between tabs</span><br/>
+      <SelectDropDown values={items}/>
+    </div>
+    </>
+
   )
 }
 
