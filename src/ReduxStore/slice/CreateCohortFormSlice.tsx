@@ -11,7 +11,7 @@ const initialState: Button = {
 
 
 const CreateCohortFormSlice = createSlice({
-    name: "CreateCohortForm",
+    name: "createCohortForm",
     initialState,
     reducers: {
         setButtonName: (state, action: PayloadAction<string>) => {

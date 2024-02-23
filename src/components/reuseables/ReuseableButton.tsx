@@ -1,8 +1,9 @@
 import React from 'react'
 
-function ReuseableButton({title, buttonStyle, onClickFunction}) {
+function ReuseableButton({title, disabled ,buttonStyle, onClickFunction}) {
   return (
     <button 
+    disabled={disabled}
     className={buttonStyle}
     onClick={onClickFunction}
     >

@@ -90,9 +90,9 @@ function CreateCohortForm({ open }) {
           id="drop_zone"
           onDrop={dropHandler}
           onDragOver={dragOverHandler}
-          className="border border-teal-[#D0DCE4] mb-5 h-44 w-80 bg-stone-200  grid place-items-center rounded-lg "
+          className="border border-teal-[#D0DCE4] mb-5 h-44 w-80 bg-stone-100 p-1 pt-16 rounded-lg "
         >
-          <FiUpload />
+          <FiUpload className="ml-32 mb-3" />
           <h5>
             Drag and drop or <span className="">choose file</span>{" "}
             <i>drop zone</i>.
@@ -101,14 +101,15 @@ function CreateCohortForm({ open }) {
         </div>
         <span>You can do this later.</span>
 
-        <div>
+        <div className="ml-[6.5vw]">
           <ReuseableButton
             title={"Cancel"}
-            buttonStyle={"border border-[#008EEF]"}
+            buttonStyle={"border border-[#008EEF] p-2 rounded-xl"}
             onClickFunction={() => {}}
           />
           <ReuseableButton
-            buttonStyle={"bg-[#008EEF] text-white"}
+            disabled={true}
+            buttonStyle={"bg-[#008EEF] text-white rounded p-2 ml-3 w-22 disabled:opacity-40"}
             title={"Create Cohort"}
             onClickFunction={() => {}}
           />

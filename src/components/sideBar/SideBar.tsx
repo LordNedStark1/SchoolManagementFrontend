@@ -1,8 +1,23 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import SideBarItems from './SideBarItems'
 import SelectDropDown from '../reuseables/SelectDropDown'
+import { useDispatch, useSelector } from 'react-redux'
+import { logIn, logOut } from '@/ReduxStore/slice/AuthSlice'
+import { AppDispatch } from '@/ReduxStore/Store'
 
 function SideBar() {
+  const[selectedItem , setSelectedItem] =useState<string>("")
+  const dispatch = useDispatch<AppDispatch>()
+  const [userValue , setUserValue] = useState('')
+  // const selectButton = useSelector((state) => state.CreateCohortFormSlice.createCohortForm)
+  // console.log(selectButton);
+  
+  const handleToggleView = (item: string) => { 
+    console.log(item);
+    
+      setSelectedItem(item)
+  }
   const items = [
     {
       name: 'Cohorts',
@@ -21,17 +36,35 @@ function SideBar() {
       imagePath: '/user.png'
     },
   ]
+  // return (
+  //   <>
+  //   <div className=' hidden md:block md:mt-12 ml-12 mr-9'>
+  //     <SideBarItems values={items} />
+  //   </div>
+  //   <div className='grid justify-center place-items-center mt-6 md:hidden'>
+  //     <span className='ml-4 '>Switch between tabs</span><br/>
+  //     <SelectDropDown values={items}/>
+  //   </div>
+  //   </>
+
+  // )
+
+  const onLogin = () => {
+      dispatch(logIn(userValue))
+  }
+  const onLogout = () => {
+      dispatch(logOut())
+  }
   return (
     <>
-    <div className=' hidden md:block md:mt-12 ml-12 mr-9'>
-      <SideBarItems values={items} />
-    </div>
-    <div className='grid justify-center place-items-center mt-6 md:hidden'>
-      <span className='ml-4 '>Switch between tabs</span><br/>
-      <SelectDropDown values={items}/>
-    </div>
+      <input title='userValue' type='text' onChange={(e)  => setUserValue(e.target.value)}/>
+      <button 
+        onClick={onLogin}
+      >Login</button>
+      <button
+      onClick={onLogout}
+      >Logout</button>
     </>
-
   )
 }
 
