@@ -23,7 +23,7 @@ function SideBar() {
   ]
   return (
     <>
-    <div className=' hidden md:visible md:mt-12 ml-12 mr-9'>
+    <div className=' hidden md:block md:mt-12 ml-12 mr-9'>
       <SideBarItems values={items} />
     </div>
     <div className='grid justify-center place-items-center mt-6 md:hidden'>

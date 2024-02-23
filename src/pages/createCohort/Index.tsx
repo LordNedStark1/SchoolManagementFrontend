@@ -8,12 +8,13 @@ function Index() {
   return (
     <>
       <SchoolHeader />
+      
       <SchoolImage />
 
-      {/* <div className = 'sm:grid md:flex flex-row'> */}
+      <div className = ' md:flex flex-row'>
         <SideBar/>
         <CreateCohortBody/>
-      {/* </div> */}
+      </div>
       
     </>
   );

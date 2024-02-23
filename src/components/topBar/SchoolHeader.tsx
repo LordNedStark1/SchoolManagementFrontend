@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { RxAvatar } from "react-icons/rx";
 import SchoolLogo from "../reuseables/SchoolLogo";
@@ -10,17 +10,44 @@ import DehazeIcon from '@mui/icons-material/Dehaze';
 
 
 const values = ["Mathew", 'Judith', 'Honest', 'Cent']
-const menuValues = ['home','work force','Resource Library' ]
+const menuValues = [
+  {
+    name: 'Home'
+  },
+  {
+    name: 'Work Force'
+  },
+  {
+    name: 'Resource Library'
+  },
+]
 
 function SchoolHeader() {
+  const [menuDropDown , setMenuDropDown] = useState(false)
+  const handleMenuDropDown = () =>{
+    setMenuDropDown(prev => !prev)
+     
+  }
+  
+  
   return (
     <>
-    <div className=" md:hidden flex ">
+    <div className="fixed top-0 bg-white md:mb-0 mb-12 w-full md:hidden  flex justify-between px-4 md:px-12 h-1 pt-2 pl-6">
+
     <SchoolLogo url="" logoName={''}/>
-    <DehazeIcon/>
-    <MenuDropDown menuValues={menuValues}/>
+
+    <div className="mr-3.5 ">
+    {menuDropDown ?
+      <MenuDropDown menuValues={menuValues} close={handleMenuDropDown}/>
+       :
+     <RxAvatar size={33} color="#008EEF" onClick={handleMenuDropDown}/>
+     
+    }
+   </div>
+
     </div>
-    <div className="hidden md:flex flex-rows border p-4  justify-evenly shadow-md shadow-gray-500">
+    <div className="md:hidden h-1  "></div>
+    <div className="fixed w-full bg-white top-0 hidden md:flex flex-rows border p-4  justify-evenly shadow-md shadow-gray-500">
       <SchoolLogo url="" logoName={'enum'}/>
         <NavBar/>
       <div className="flex flex-rows">
@@ -29,11 +56,12 @@ function SchoolHeader() {
         </a>
         <div className="flex flex-rows ml-4">
           <RxAvatar size={30} color="#008EEF"/>
-          <SelectItems values={values}/>
+          <SelectItems values={values} selectStyle={"mr-5 ml-3 rounded-md bg-white"}/>
         </div>
-        <BsFillGrid3X3GapFill size={30} color="#008EEF"/>
+        <BsFillGrid3X3GapFill size={30} color="#008EEF"/>       
       </div>
     </div>
+
     </>
   );
 }

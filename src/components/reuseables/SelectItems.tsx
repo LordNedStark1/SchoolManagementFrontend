@@ -1,13 +1,13 @@
 import React from 'react'
 
-function SelectItems({values}) {
+function SelectItems({values, selectStyle}) {
   return (
     <>
       <select
             
             name={values[0]}
             id={values[0]}
-            className="mr-5 ml-3 rounded-md bg-white"
+            className={selectStyle}
           >
         
           {values.map((value) => (

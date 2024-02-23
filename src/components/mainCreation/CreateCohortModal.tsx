@@ -24,7 +24,14 @@ export default function BasicModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      
+         <button 
+        data-modal-target="default-modal" data-modal-toggle="default-modal"
+        className='bg-[#008EEF] w-40 h-12 rounded'
+        onClick={handleOpen}
+        >
+            Create a Cohort
+        </button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -33,7 +40,7 @@ export default function BasicModal() {
       >
         <Box sx={style}>
         <CreateCohortForm 
-        // close={handleClose}
+        open={handleClose}
          />
         </Box>
       </Modal>

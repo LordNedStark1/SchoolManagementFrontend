@@ -14,7 +14,7 @@ function SchoolLogo({ url, logoName }){
         <span className="text-[#008EEF] font-extrabold text-lg">{logoName}</span>
       </div>
     ) : (
-      <img src={url} alt="school logo" height={65} width={65}/>
+      <img src={url} className="" alt="school logo" height={65} width={65}/>
     )}
   </>
   );
