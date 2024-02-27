@@ -14,6 +14,7 @@ function SelectItems({values, selectStyle}) {
            <option 
            key={value}
            value={value
+            
         }>{value}</option>
         
       ))}

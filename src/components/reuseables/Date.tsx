@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-function Date({title , dateStyle, id, name, min, max }) {
-  const[date, setDate] =useState('')
+function Date({title , dateStyle, id, name, min, max, onChange }) {
+  
   return (
     <div>
         <label>{title}</label>
@@ -13,8 +13,8 @@ function Date({title , dateStyle, id, name, min, max }) {
       name = {name}
       min={min}
       max= {max}
-      value ={date}
-      onChange={(event)=>setDate(event?.target.value)}
+      // value ={date}
+      onChange={onChange}
       />
     </div>
   )

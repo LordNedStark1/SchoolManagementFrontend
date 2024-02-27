@@ -7,6 +7,8 @@ import NavBar from "./NavBar";
 import SelectItems from "../reuseables/SelectItems";
 import MenuDropDown from '../Hamburger/MenuDropDown'
 import DehazeIcon from '@mui/icons-material/Dehaze';
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "@/ReduxStore/Store";
 
 
 const values = ["Mathew", 'Judith', 'Honest', 'Cent']
@@ -15,7 +17,7 @@ const menuValues = [
     name: 'Home'
   },
   {
-    name: 'Work Force'
+    name: 'Work Force'   
   },
   {
     name: 'Resource Library'
@@ -24,15 +26,17 @@ const menuValues = [
 
 function SchoolHeader() {
   const [menuDropDown , setMenuDropDown] = useState(false)
+  // const cohort = useAppSelector(state => state.createCohortReducer.value)
   const handleMenuDropDown = () =>{
     setMenuDropDown(prev => !prev)
      
   }
   
+  // console.log(cohort);
   
   return (
     <>
-    <div className="fixed top-0 bg-white md:mb-0 mb-12 w-full md:hidden  flex justify-between px-4 md:px-12 h-1 pt-2 pl-6">
+    <div className="md:hidden fixed top-0 bg-white md:mb-0 mb-12 w-full   flex justify-between px-4 md:px-12 h-1 pt-2 pl-6">
 
     <SchoolLogo url="" logoName={''}/>
 
@@ -46,10 +50,14 @@ function SchoolHeader() {
    </div>
 
     </div>
+
+
+    
     <div className="md:hidden h-1  "></div>
-    <div className="fixed w-full bg-white top-0 hidden md:flex flex-rows border p-4  justify-evenly shadow-md shadow-gray-500">
+    <div className="hidden fixed w-full bg-white top-0  md:flex flex-rows border p-4  justify-evenly shadow-md shadow-gray-500">
       <SchoolLogo url="" logoName={'enum'}/>
-        <NavBar/>
+        <NavBar/> 
+        {/* <li className="text-black">cohort name is = {cohort.cohortName}</li> */}
       <div className="flex flex-rows">
         <a className="mr-4" rel="" href="" target="_blank">
           <MdOutlineNotificationsNone  size={25} />

@@ -2,7 +2,7 @@ import React from "react";
 import SchoolHeader from "@/components/topBar/SchoolHeader";
 import SchoolImage from "@/components/topBar/SchoolImage";
 import SideBar from "@/components/sideBar/SideBar";
-import CreateCohortBody from "@/components/body/CreateCohortBody";
+import BodyDisplay from "@/components/body/BodyDisplay";
 
 function Index() {
   return (
@@ -13,7 +13,7 @@ function Index() {
 
       <div className = ' md:flex flex-row'>
         <SideBar/>
-        <CreateCohortBody/>
+        <BodyDisplay/>
       </div>
       
     </>

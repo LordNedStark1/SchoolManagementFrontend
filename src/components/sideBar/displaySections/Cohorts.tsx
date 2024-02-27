@@ -1,12 +1,12 @@
 import React from 'react'
-import BasicModal from '../mainCreation/CreateCohortModal'
-function CreateCohortBody() {
+import BasicModal from '@/components/mainCreation/CreateCohortModal'
+function Cohorts() {
     const handleClick = () =>{
 
     }
   return (
     <div className='sm:ml-2 md:ml-8'>
-        <div className= ' h-9 w-80'>
+        <div className= ''>
             <p className= 'hidden bg-blue w-52 h-32 mt-5'> Cohort</p>
         </div>
       <div className='grid place-items-center sm:mt-14 md:ml-44 sm:ml-14 md:mt-24 ml-12' > 
@@ -20,4 +20,4 @@ function CreateCohortBody() {
   )
 }
 
-export default CreateCohortBody
+export default Cohorts

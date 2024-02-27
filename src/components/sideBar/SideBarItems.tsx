@@ -13,6 +13,7 @@ function SideBarItems({ values }: SideBarItemsProps) {
         {values.map((value, index) => (
           
           <NavItem index={index} value={value}/>
+      
       ))}
     </div>
   );

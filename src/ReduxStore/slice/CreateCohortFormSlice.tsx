@@ -1,25 +1,73 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-
-interface Button {
-    buttonName: string;
-}
-
-const initialState: Button = {
-    buttonName: "",
+type InitialState = {
+    value: cohortState;
+};
+export type ImageFile = {
+    file: File;
+    mimeType: string;
 };
 
+// const myImage : ImageFile = {
+//     file: new File([], 'example.jpg', {type: 'image/jpeg'}),
+//     mimeType: 'image/jpeg'
+// };
 
-const CreateCohortFormSlice = createSlice({
-    name: "createCohortForm",
+export type cohortState = {
+    cohortName: string;
+    description: string;
+    program: string;
+    startDate: string;
+    endDate: string;
+    file: ImageFile | null|"";
+   
+}
+
+const initialState = {
+    value: {
+        cohortName: "",
+        description: "",
+        program: "",
+        startDate: "",
+        endDate: "",
+        file:  "",
+    }as cohortState
+}as InitialState;
+
+export const createCohort = createSlice({
+    name: "createCohort",
     initialState,
     reducers: {
-        setButtonName: (state, action: PayloadAction<string>) => {
-            state.buttonName = action.payload;
+        deleteForm: () => {
+            return initialState;
         },
-    },
-})
+        saveCohort: (state, action : PayloadAction < cohortState >) => {
+            const {
+                cohortName,
+                description,
+                program,
+                startDate,
+                endDate,
+                file
+            } = action.payload;
+            return {
+                value: {
+                    cohortName,
+                    description,
+                    program,
+                    startDate,
+                    endDate,
+                    file
+                }
+              
+            };
+        }
+    }
+});
 
-export const { setButtonName } = CreateCohortFormSlice.actions;
+export const {
+    deleteForm,
+    saveCohort
+} = createCohort.actions;
 
-export default CreateCohortFormSlice.reducer;
+export default createCohort.reducer;

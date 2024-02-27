@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext","es2017"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Hamburger/MenuDropDown.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Hamburger/MenuDropDown.jsx", "src/components/topBar/SchoolImage.jsx"],
   "exclude": ["node_modules"]
 }

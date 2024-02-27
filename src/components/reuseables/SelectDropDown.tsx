@@ -7,7 +7,7 @@ function SelectDropDown({ values }) {
       <select
         name={values[0].name}
         id={values[0].name}
-        className="mr-5 ml-3 w-32 sm:w-64 pl-3 mt-1 h-10 border  rounded bg-white"
+        className="mr-5 ml-8 w-32 mb-5 sm:ml-1 sm:mb-0 sm:w-64 pl-3 mt-1 h-10 border  rounded bg-white"
       >
         {values.map((value) => (
         <option 

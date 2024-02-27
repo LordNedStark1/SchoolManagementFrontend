@@ -1,122 +1,169 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import SelectItems from "../reuseables/SelectItems";
 import Date from "../reuseables/Date";
-import { FiUpload } from "react-icons/fi";
+import {FiUpload} from "react-icons/fi";
 import ReuseableButton from "../reuseables/ReuseableButton";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "@/ReduxStore/Store";
+import {cohortState, saveCohort} from "@/ReduxStore/slice/CreateCohortFormSlice";
+import DragAndDropFile from "../reuseables/DragAndDropFile";
+import axios from "axios";
+import { baseUrl, viewAllProgram } from "@/assets/urls/Urls";
 
-const values = ["Java", "Pyhon", "JavaScript", "Go Lang"];
-function CreateCohortForm({ open }) {
-  const dragOverHandler: React.DragEventHandler<HTMLDivElement> = (event) => {
-    // Your drag over handler logic here
-  };
-  function dropHandler(ev) {
-    console.log("File(s) dropped");
 
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
-
-    if (ev.dataTransfer.items) {
-      // Use DataTransferItemList interface to access the file(s)
-      [...ev.dataTransfer.items].forEach((item, i) => {
-        // If dropped items aren't files, reject them
-        if (item.kind === "file") {
-          const file = item.getAsFile();
-          console.log(`… file[${i}].name = ${file.name}`);
+function CreateCohortForm({open}) {
+    const dispatch = useDispatch < AppDispatch > ();
+    const [programs, setPrograms] = useState([]);
+    const [form,
+        setForm] = useState < cohortState > ({
+        cohortName: "",
+        description: "",
+        program: "",
+        startDate: "",
+        endDate: "",
+        file: ""
+    });
+    async function getPrograms  () {
+        const url =baseUrl + viewAllProgram
+        try{
+         const response =await axios.get(url, {
+            headers : {
+                'Content-Type' : "application/json",
+            }
+         })
+         if(response.status == 200){
+            const data = response.data;
+            console.log(data);
+            
+            setPrograms(data)
+         }
+        }catch(error){
+            console.log(error)
         }
-      });
-    } else {
-      // Use DataTransfer interface to access the file(s)
-      [...ev.dataTransfer.files].forEach((file, i) => {
-        console.log(`… file[${i}].name = ${file.name}`);
-      });
+         
+      }
+      async function submitForm  () {
+        const url =baseUrl + '/api/v1/school/createCohort'
+        try{
+         const response =await axios.get(url, {
+            headers : {
+                'Content-Type' : "application/json",
+            }
+         })
+         if(response.status == 200){
+            const data = response.data;
+            console.log(data);
+            
+            setPrograms(data)
+         }
+        }catch(error){
+            console.log(error)
+        }
+         
+      }
+     
+    useEffect(() => {
+        console.log( getPrograms());
+      }, []);
+    const handleFormChange = (e : any) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
+    const onCreateCohort = () => {
+        // console.log(form);
+
+        dispatch(saveCohort(form));
+    };
+    const dragOverHandler : React.DragEventHandler < HTMLDivElement > = (event) => {
+        event.preventDefault();
+        // Your drag over handler logic here
+    };
+    function dropHandler(ev) {
+        ev.preventDefault();
+        console.log(ev.dataTransfer.files);
+
+        // if (ev.dataTransfer.items) {   // Use DataTransferItemList interface to
+        // access the file(s)   [...ev.dataTransfer.items].forEach((item, i) => {     //
+        // If dropped items aren't files, reject them     if (item.kind === "file") {
+        // const file = item.getAsFile();       console.log(`… file[${i}].name =
+        // ${file.name}`);     }   }); } else {   // Use DataTransfer interface to
+        // access the file(s)   [...ev.dataTransfer.files].forEach((file, i) => {
+        // console.log(`… file[${i}].name = ${file.name}`);   }); }
     }
-  }
 
-  return (
-    <div >
-      <div className=" flex  justify-between w-80 items-center px-2  bg-white">
-        <h4 className=" font-extrabold">Create a Cohort</h4>
-        <button onClick={open}>X</button>
-      </div>
+    return (
+        <div>
+            <div className=" flex  justify-between w-80 items-center px-2  bg-white">
+                <h4 className=" font-extrabold">Create a Cohort</h4>
+                <button onClick={open}>X</button>
+            </div>
 
-      <div className=" max-h-[70vh] overflow-y-auto transition ease-in-out delay-150 p-4 mt-12"  >
-        <label>Cohort Name</label>
-        <input
-          className="border border-teal-[#D0DCE4] mb-5 h-14 w-80 bg-gray-50 rounded "
-          title="Cohort"
-          id=""
-          name=""
-        />
+            <div
+                className=" max-h-[70vh] text-[14px] text-[#1E323F] overflow-y-auto transition ease-in-out delay-150 p-4 mt-12">
+                <label>Cohort Name</label>
+                <input
+                    className="border border-teal-[#D0DCE4] mb-2 h-[30px] w-80 bg-white rounded "
+                    title="Cohort"
+                    id=""
+                    name="cohortName"
+                    onChange={handleFormChange}/>
 
-        <label>Description</label>
-        <textarea
-          className="border border-teal-[#D0DCE4]  h-20 rounded mb-5 w-80  bg-gray-50 "
-          title="Cohort Name"
-          id=""
-          name=""
-        ></textarea>
+                <label>Description</label>
+                <textarea
+                    className="border border-teal-[#D0DCE4]  h-18 rounded mb-3 w-80  bg-white "
+                    title="Cohort Name"
+                    id=""
+                    name=""
+                    onChange={handleFormChange}></textarea>
 
-        <label>Program</label>
-        <br />
+                <label>Program</label>
+                <br/>
 
-        <SelectItems
-          values={values}
-          selectStyle={
-            "mr-5 ml-3 rounded-md w-80 h-12 border border-teal-[#D0DCE4] rounded bg-gray-50"
-          }
-        />
-        <div className="flex mt-4 mb-6">
-          <Date
-            title={"Start Date"}
-            dateStyle={"mt-2 border border-teal-[#D0DCE4] pl-1 pr-1 pt-1 pb-1"}
-            id="start"
-            name="trip-start"
-            min="2024-03-01"
-            max="2025-12-31"
-          />
-          <Date
-            title={"End Date"}
-            dateStyle={"mt-2 border border-teal-[#D0DCE4] pl-1 pr-1 pt-1 pb-1"}
-            id="end"
-            name="trip-end"
-            min="2024-01-01"
-            max="2026-12-31"
-          />
+                <SelectItems
+                    values={programs}
+                    selectStyle={" rounded-md w-80 h-12 border border-teal-[#D0DCE4] bg-white"}/>
+                <div className="flex mt-2 mb-3">
+                    <Date
+                        title={"Start Date"}
+                        dateStyle={"mt-2 border border-teal-[#D0DCE4] "}
+                        id="start"
+                        name="startDate"
+                        min="2024-03-01"
+                        max="2025-12-31"
+                        onChange={handleFormChange}/>
+                    <Date
+                        title={"End Date"}
+                        dateStyle={"mt-2 border border-teal-[#D0DCE4] "}
+                        id="end"
+                        name="endDate"
+                        min="2024-03-01"
+                        max="2026-12-31"
+                        onChange={handleFormChange}/>
+                </div>
+                <label>Add a cohort Avatar</label>
+                <br/>
+
+                <DragAndDropFile dropHandler={dropHandler} dragOverHandler={dragOverHandler}/>
+                <span>You can do this later.</span>
+
+                <div className="ml-[8.5vw] mt-3">
+                    <ReuseableButton
+                        disabled={false}
+                        title={"Cancel"}
+                        buttonStyle={"border border-[#008EEF] p-2 rounded-xl"}
+                        onClickFunction={() => {}}/>
+                    <ReuseableButton
+                        disabled={false}
+                        buttonStyle={"bg-[#008EEF] text-white rounded p-2 ml-3 w-22 disabled:opacity-40"}
+                        title={"Create Cohort"}
+                        onClickFunction={submitForm}/>
+                </div>
+            </div>
         </div>
-        <label>Add a cohort Avatar</label>
-        <br />
-        <div
-          id="drop_zone"
-          onDrop={dropHandler}
-          onDragOver={dragOverHandler}
-          className="border border-teal-[#D0DCE4] mb-5 h-44 w-80 bg-stone-100 p-1 pt-16 rounded-lg "
-        >
-          <FiUpload className="ml-32 mb-3" />
-          <h5>
-            Drag and drop or <span className="">choose file</span>{" "}
-            <i>drop zone</i>.
-          </h5>
-          <span>240x240 px Recommended, max size 1MB </span>
-        </div>
-        <span>You can do this later.</span>
-
-        <div className="ml-[6.5vw]">
-          <ReuseableButton
-            title={"Cancel"}
-            buttonStyle={"border border-[#008EEF] p-2 rounded-xl"}
-            onClickFunction={() => {}}
-          />
-          <ReuseableButton
-            disabled={true}
-            buttonStyle={"bg-[#008EEF] text-white rounded p-2 ml-3 w-22 disabled:opacity-40"}
-            title={"Create Cohort"}
-            onClickFunction={() => {}}
-          />
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default CreateCohortForm;
